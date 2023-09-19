@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tendencias</title>
+    <link rel="stylesheet" href="ruta/bootstrap.min.css">
+    <style>
+    .page-header {
+    background-color: royalblue;
+    margin-top: 0;
+    padding: 10px 10px 10px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 26pt;
+    text-decoration: none;
+}
+
+
+    </style>
+
+</head>
+<body>
+
+
+
+    
+    {% include 'barra_navegacion.html' %}
+    <div class="page-header">
+        
+        <h1>Tendencias</h1>
+        </div>
+        <div class="card">
+        <div class="content container">
+            <div class="row">
+                {% for titulo, contenido, url in datos %}
+                    <div class="col-md-6">
+                        <h2><a href="{{ url }}" target="_blank" rel="noopener">{{ titulo }}</a></h2>
+                        <p>{{ contenido|linebreaksbr }}</p>
+                    </div>
+                    {% if forloop.counter|divisibleby:2 %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+
+
+
+    <script src="ruta/jquery.min.js"></script>
+    <script src="ruta/popper.min.js"></script>
+    <script src="ruta/bootstrap.min.js"></script>
+
+
+</body>
+</html>

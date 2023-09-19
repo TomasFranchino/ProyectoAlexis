@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio sesion</title>
+    <!--<link rel="stylesheet" type="text/css" href="{% static login.css %}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: royalblue;
+    /*background-image: url("/frontend/2021-12-19.jpg");
+    background-size: cover;  
+    background-repeat: no-repeat; */
+}
+form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    text-align: center;
+    padding: 20px 25px;
+    box-shadow: 0 5px 10px rgba(71, 3, 6, 0.7);
+}
+form.title{
+    color: #252525;
+    font-size: 35px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+form label{
+    margin-bottom: 35px;
+}
+form label.fa-solid{
+    font-size: 20px;
+    color: royalblue;
+    margin-right: 10px;
+}
+form label input{
+    outline: none;
+    border: none;
+    color: #252525;
+    border-bottom: solid 1px  royalblue;
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+form .link{
+    color: #252525;
+    margin-top: 12px;
+}
+
+form button{
+    color: #fff;
+    border: none;
+    background: linear-gradient(to left,royalblue,rgb(78, 145, 167));
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.title{
+    padding-bottom: 15px;
+}
+#estado-de-inicio{
+    margin-bottom: 15px;
+    color: red;
+}
+    </style>
+
+</head>
+<body>
+  
+    <form method="post" action="">
+
+
+        <h1 class="title">Inicio sesion</h1>
+
+        {% csrf_token %}
+        <label for="usuario">
+            <i class="fa-solid fa-user"></i> <input type="text" name="username" maxlength="30", placeholder="Usuario" > 
+        </label>
+        <label for="pass">
+            <i class="fa-solid fa-lock"></i> <input placeholder="Contraseña" type="password" name="password" maxlength="30">
+        </label>
+        {% if error_message %}
+        <p id="estado-de-inicio" class="error-message">{{ error_message }}</p>
+        {% endif %}
+        <button type="submit" id="button">Acceder</button>
+
+
+
+    </form>
+
+
+</body>
+</html>

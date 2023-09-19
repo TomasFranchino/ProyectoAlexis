@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicaciones</title>
+</head>
+<body>
+    {% include 'barra_navegacion.html' %}
+    <div class="post">
+        
+        <h2><a href="{% url 'home' %}">{{ publicaciones.autor }}</a></h2>
+        <p>{{ publicaciones.texto|linebreaksbr }}</p>
+        {% if publicaciones.fecha_publicacion %}
+            <div class="date">
+                {{ publicaciones.fecha_publicacion }}
+            </div>
+        {% endif %}
+    </div>
+    <br>
+    {% if publicaciones.autor == usuario %}
+    <a class="btn btn-secondary" href="{% url 'publicacion_eliminar' pk=publicaciones.pk %}">Eliminar</a>
+    <a class="btn btn-primary" href="{% url 'publicacion_editar' pk=publicaciones.pk %}">Editar</a>
+    {% endif %}
+    
+</body>

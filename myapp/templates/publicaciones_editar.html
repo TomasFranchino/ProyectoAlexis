@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva publicacion</title>
+    <style>
+      .page-header {
+    background-color: royalblue;
+    margin-top: 0;
+    padding: 10px 10px 10px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 26pt;
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    {% include 'barra_navegacion.html' %}
+    <div class="page-header">
+        <h1>Nueva Publicacion</h1>
+        </div>
+        <br>
+     
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+     
+</body>
+</html>
