@@ -9,7 +9,7 @@ class Publicacion(models.Model):
     texto = models.TextField()
     fecha_creado = models.DateTimeField(default=timezone.now)
     fecha_publicacion = models.DateTimeField(blank=True,null=True)
-    
+    fav = models.IntegerField(default=0)
     
     def publicar(self):
         self.fecha_publicacion = timezone.now()
@@ -17,8 +17,7 @@ class Publicacion(models.Model):
 
     def __str__(self):
         return self.texto
-    '''
-    fav = models.IntegerField(default=0)
+    
     def agregar_fav(self):
         self.fav += 1
         self.save()
@@ -29,4 +28,4 @@ class Publicacion(models.Model):
             self.save()
             
 class Comentario(Publicacion):
-     id_publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)'''
+    id_publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE, related_name='comentarios')
