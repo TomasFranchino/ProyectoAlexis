@@ -57,20 +57,30 @@
                             <span class="material-symbols-outlined" id="fav">favorite</span>
                         </div>
                     </div>
+                    {% for Respuesta in respuestas %}
+                            {% if Respuesta.respuesta_a_id == Publicacion.pk %}
                     <div class="card">
+                        
                         <div class="card-body">
-                            <h5 class="card-title">{{ Publicacion.autor }}</h5>
-                            <p class="card-text">interesante la publi ce arriba <!--{{ Publicacion.texto|linebreaksbr }}--></p>
+                            
+                            
+                            <h5 class="card-title">{{ Respuesta.autor }}</h5>
+                            <p class="card-text">{{ Respuesta.texto|linebreaksbr }}</p>
+                            
                             <span class="material-symbols-outlined">chat</span>
                             <span class="material-symbols-outlined" id="fav">favorite</span>
+                            
                         </div>
+                        
                     
                     </div>
+                    {% endif %}
+                            {% endfor %}
+                    
                 </div>
           
             </div>
             {% endfor %}
-      
         
 
 </body>

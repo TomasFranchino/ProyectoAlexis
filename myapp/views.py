@@ -29,14 +29,19 @@ def Logout(request):
     return redirect('/')
 
 def Home(request):
-    publicaciones = Publicacion.objects.filter(fecha_publicacion__lte=timezone.now()).order_by('fecha_publicacion')
+    publicaciones = Publicacion.objects.filter(respuesta_a=None).order_by('fecha_publicacion')
+    respuestas = Publicacion.objects.exclude(respuesta_a=None).order_by('fecha_publicacion')
     usuario = get_user(request)
-    return render(request, 'index.html', {'publicaciones': publicaciones,'usuario':usuario})
+
+    return render(request, 'index.html', {'publicaciones': publicaciones,'usuario':usuario, 'respuestas':respuestas})
 
 def Publicacion_detalle(request, pk):
     publicaciones = get_object_or_404(Publicacion, pk=pk)
+    respuestas = Publicacion.objects.filter(respuesta_a = publicaciones).order_by('fecha_publicacion')
     usuario = get_user(request)
-    return render(request, 'publicaciones_detalle.html', {'publicaciones': publicaciones,'usuario':usuario})
+
+    return render(request, 'publicaciones_detalle.html', {'publicaciones': publicaciones, 'usuario': usuario, 'respuestas': respuestas})
+
 @login_required
 def Publicacion_nueva(request):
     usuario = get_user(request)
