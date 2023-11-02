@@ -1,137 +1,71 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="{% static estilo %}">
     <title>Publicaciones</title>
-    <!-- Agregar los enlaces a los archivos CSS de Bootstrap 5 -->
-    <style>
-    .col-md-8{
-      
-        margin: 8px; 
-    }
-    .card-img-top{
-        height: auto;
-        width: auto;
-    }
-    .row{
-        display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    }
-   
-.material-symbols-outlined{
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
-.card-title{
-    color: #0d6efd;
-}
-
-</style>
 </head>
 <body>
-<!--display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;-->
-    
+    <form method="POST" class="post-form">{% csrf_token %}
+        
+        <div class="field publicar">
+            <input type="text" name="texto" id="texto" class="form-control">
+            <button class="btn btn-outline-secondary" type="submit" id="boton-guardar">Publicar</button>
+        </div>
+    </form>
     {% for Publicacion in publicaciones %}
             <div class="row">
                
                 <div class="col-md-8">
+                    <a href="{% url 'publicacion_detalle' pk=Publicacion.pk %}" style="text-decoration: none; color: inherit;">
                     <div class="card">
-
-                        <!--<img src='django-logo-negative.png' class="card-img-top">-->
 
                         <div class="card-body">
                             <h5 class="card-title">{{ Publicacion.autor }}</h5>
                             <p class="card-text">{{ Publicacion.texto|linebreaksbr }}</p>
-                            <a href="{% url 'publicacion_detalle' pk=Publicacion.pk %}" class="btn btn-primary">Ver más</a>
-                            <span class="material-symbols-outlined">chat</span>
-                            <span class="material-symbols-outlined" id="fav">favorite</span>
-                        </div>
+                             <a class="" href="{% url 'estilo' %}" style="color: #303030"><span class="material-symbols-outlined">chat</span></a>
+                            <a class="" href="{% url 'fav' pk=Publicacion.pk %}" style="color: #303030"><span class="material-symbols-outlined">favorite</span></a>
+                            {{ Publicacion.fecha_publicacion }}
+                        </div> 
+                        <form method="POST" class="post-form">{% csrf_token %}
+                            <div class="field publicar">
+                                <select name="respuesta_a" id="id_respuesta_a" style="display: none;">
+                                    <option value="{{ Publicacion.pk }}" selected=""></option>
+                                  </select>
+                                <input type="text" name="texto" id="texto" class="form-control">
+                                <button class="btn btn-outline-secondary" type="submit" id="boton-guardar">Publicar</button>
+                            </div>
+                        </form>
                     </div>
-                    {% for Respuesta in respuestas %}
+                    </a>
+                           {% for Respuesta in respuestas %} 
                             {% if Respuesta.respuesta_a_id == Publicacion.pk %}
+                    <a href="{% url 'publicacion_detalle' pk=Respuesta.pk %}" style="text-decoration: none; color: inherit;">
                     <div class="card">
-                        
                         <div class="card-body">
-                            
-                            
                             <h5 class="card-title">{{ Respuesta.autor }}</h5>
                             <p class="card-text">{{ Respuesta.texto|linebreaksbr }}</p>
                             
                             <span class="material-symbols-outlined">chat</span>
-                            <span class="material-symbols-outlined" id="fav">favorite</span>
-                            
+                            <a class="" href="{% url 'fav' pk=Respuesta.pk %}" style="color: #303030"><span class="material-symbols-outlined">favorite</span></a>
+                            {{ Respuesta.fecha_publicacion }}
                         </div>
                         
                     
-                    </div>
+                    </div></a>
                     {% endif %}
-                            {% endfor %}
+                        {% endfor %}
                     
                 </div>
-          
+                
             </div>
+            
             {% endfor %}
-        
-
+            <div class="publicar pub">
+                <a href="{% url 'estilo' %}"><img src="{% static 'escribirtw.png' %}" alt="escribirtw"></a>
+            </div>
 </body>
 </html>
-
-
-
-
-
-  <!--
-    <div class="content container">
-        <div class="row">
-            {% for Publicacion in publicaciones %}
-                <div class="col-md-6">
-                        <h2><a href="{% url 'publicacion_detalle' pk=Publicacion.pk %}">{{ Publicacion.titulo }}</a></h2>
-                        <p>{{ Publicacion.texto|linebreaksbr }}</p>
-                        <div class="date">
-                            <p>Publicado: {{ Publicacion.fecha_publicacion }}</p>
-                    
-                    </div>
-            
-                </div>
-                {% if forloop.counter|divisibleby:2 %}
-                   
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-
-
-
-
-
-     {% for Publicacion in publicaciones %}
-   
-    <div class="card col-md-6">
-        
-        <img src='django-logo-negative.png' class="card-img-top">
-       
-       
-        <div class="card-body">
-             {% if forloop.counter|divisibleby:2 %}
-          <h5 class="card-title">{{ Publicacion.titulo }}</h5>
-          <p class="card-text">{{ Publicacion.texto|linebreaksbr }}</p>
-          <a href="{% url 'publicacion_detalle' pk=Publicacion.pk %}" class="btn btn-primary">Ver más</a>
- 
-        </div>
-              
-      
-       
-      </div>
-      {% endif %}
-      {% endfor %}
-  -->

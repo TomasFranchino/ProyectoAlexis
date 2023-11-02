@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,39 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>App</title>
-    
-    <style>
-
-.page-header {
-    background-color: royalblue;
-    margin-top: 0;
-    padding: 10px 10px 10px 40px;
-}
-
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 26pt;
-    text-decoration: none;
-}
-.date {
-    color: #828282;
-}
-
-
-
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    
-    font-size: 22pt;
-    margin-right: 20px;
-}
-
-    </style>
-
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 
 <body>
@@ -47,10 +15,14 @@
     <div>
         {% include 'barra_navegacion.html' %}
     </div>
-
+    
     <div class="page-header">
     <h1>Bienvenido al home</h1>
     </div>
+
+   <!--<div>
+        {% include 'publicaciones_editar.html' %}
+    </div>-->
     
     <div class="publicaciones">
         {% include 'publicaciones.html' %}

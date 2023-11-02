@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+<form method="post" action="">{% csrf_token %}
+    <h1 class="title">Registrarse</h1>
+    <label for="usuario">
+        <i class="fa-solid fa-user"></i><label for="usuario"></label>
+        <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username" placeholder="Usuario">
+          <span class="helptext" style="display: none;">Requerido. Maximo 150 Caracteres. Letras, Digitos.</span>
+    </label>
+
+    <label for="email">
+        <i class="fa-solid fa-user"></i><label for="email"></label>
+        <input type="text" name="email" maxlength="150" autocapitalize="none" autocomplete="email" autofocus="" required="" id="email" placeholder="Email">
+          <span class="helptext" style="display: none;">No cumple el formato.</span>
+    </label>
+
+
+    <label for="pass">
+        
+        <i class="fa-solid fa-lock"></i><label for="id_password1"></label>
+        <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" placeholder="Contraseña">
+          <span class="helptext"></span>
+    </label>
+    
+    <label for="pass">
+        <i class="fa-solid fa-lock"><b>*</b></i><label for="id_password2"></label>
+        <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2" placeholder="Confirmar Contraseña"> <br>
+        {% if error_message %}
+        <br>
+            <p id="estado-de-inicio" class="error-message">{{error_message}}</p> 
+            {% endif %}  
+    </label>
+
+    <!--<label for="">Usuario</label><input type="text" name="username" id="username" class="form-control">
+    <label for="">Contraseña</label><input type="password" name="password" id="password" class="form-control">--> 
+    <button type="submit" id="button">Registrarse</button>
+</form>
+
+</body>
+</html>

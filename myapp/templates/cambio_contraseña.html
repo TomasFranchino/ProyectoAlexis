@@ -5,37 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio sesion</title>
+    <title>Recuperar contraseña</title>
     <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
 <body>
-  
-    <form method="post" action="">
 
+    <form method="get" action="{% url 'cambiar_contraseña' %}">
 
-        <h1 class="title">Inicio sesion</h1>
+        <h1 class="title">Ingresar Usuario</h1>
 
         {% csrf_token %}
         <label for="usuario">
             <i class="fa-solid fa-user"></i> <input type="text" name="username" maxlength="30", placeholder="Usuario" > 
         </label>
-        <label for="pass">
+        <button type="submit" id="button">Enviar codigo</button>
+
+    </form>
+    <form method="post" action="">
+
+        <h1 class="title">Nueva Contraseña</h1>
+
+        {% csrf_token %}
+        <label for="password">
             <i class="fa-solid fa-lock"></i> <input placeholder="Contraseña" type="password" name="password" maxlength="30">
         </label>
+        <label for="codigo">
+            <i class="fa-solid fa-lock"></i> <input placeholder="Codigo" type="text" name="codigo" maxlength="30">
+        </label>
+        <button type="submit" id="button">Cambiar contraseña</button>       
         {% if error_message %}
         <p id="estado-de-inicio" class="error-message">{{ error_message }}</p>
-        <a href="{% url 'cambiar_contraseña' %}"><p>Has olvidado tu Contraseña?</p></a>
-        <br>
         {% endif %}
-        <button type="submit" id="button">Acceder</button>
-        <br>
-        <a href="{% url 'register' %}"><p>¿No tienes cuenta? <b>Registrarse</b></p></a>
-
-
-
     </form>
 
 
